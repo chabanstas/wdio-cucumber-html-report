@@ -1,12 +1,8 @@
 name: Webdriver Tests with html-nice-report
 
 on:
-  release:
-    types:
-      - created
-  push:
-    branches-ignore:
-      - '!master'
+    push:
+        branches: [main]
 
 jobs:
     Run_test:
@@ -45,4 +41,3 @@ jobs:
                   ACCESS_TOKEN: ${{'secrets.ACCESS_TOKEN'}}
                   BRANCH: main # The branch the action should deploy to.
                   FOLDER: html-reports # The folder the action should deploy.
-                  TARGET_FOLDER: docs
