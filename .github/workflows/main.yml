@@ -36,7 +36,7 @@ jobs:
               if: always()
               with:
                   name: html-nice-report
-                  path: .reports/html-reports
+                  path: reports/html-reports
                   
             - name: Deploy report
               uses: JamesIves/github-pages-deploy-action@3.1.0
