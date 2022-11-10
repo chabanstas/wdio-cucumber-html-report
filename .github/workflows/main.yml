@@ -1,8 +1,12 @@
 name: Webdriver Tests with html-nice-report
 
 on:
-    push:
-        branches: [master]
+  release:
+    types:
+      - created
+  push:
+    branches-ignore:
+      - '!master'
 
 jobs:
     Run_test:
@@ -22,20 +26,23 @@ jobs:
             - run: npm i
             - name: run test
               run: npm run wdio
+              
             - name: Create Report
               if: always()
               run: npm run report
+              
             - name: Upload artifact html-nice-report
               uses: actions/upload-artifact@v1
               if: always()
               with:
                   name: html-nice-report
-                  path: ./reports/html-reports
+                  path: .reports/html-reports
+                  
             - name: Deploy report
               uses: JamesIves/github-pages-deploy-action@3.1.0
               if: always()
               with:
                   ACCESS_TOKEN: ${{'secrets.ACCESS_TOKEN'}}
-                  BRANCH: master # The branch the action should deploy to.
+                  BRANCH: main # The branch the action should deploy to.
                   FOLDER: html-reports # The folder the action should deploy.
                   TARGET_FOLDER: docs
